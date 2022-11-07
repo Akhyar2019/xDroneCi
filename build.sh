@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
-echo "Downloading few Dependecies . . ."
+echo "Downloading few Dependeciess . . ."
 git config --global user.name "akhyar2019"
 git config --global user.email "babyakhyar@gmail.com"
-git clone --depth=1 https://github.com/xyz-prjkt/xRageTC-clang xRage
-git clone --depth=1 https://github.com/fazrul1994/ignominiOus_Poplar poplar
+git clone --depth=1 https://gitlab.com/LeCmnGend/proton-clang proton
+git clone --depth=1 https://github.com/whatawurst/android_kernel_sony_msm8998 -b lineage-20 poplar
 
 # Main
 KERNEL_ROOTDIR=$(pwd)/poplar # IMPORTANT ! Fill with your kernel source root directory.
-DEVICE_DEFCONFIG=ignominiOus-poplaR_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
-CLANG_ROOTDIR=$(pwd)/xRage # IMPORTANT! Put your clang directory here.
-export KBUILD_BUILD_USER=NoFace # Change with your own name or else.
-export KBUILD_BUILD_HOST=NoName-circleCI # Change with your own hostname.
-IMAGE=$(pwd)/poplar/out/arch/arm64/boot/Image.gz-dtb
+DEVICE_DEFCONFIG=lineage-msm8998-yoshino-poplar_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
+CLANG_ROOTDIR=$(pwd)/proton # IMPORTANT! Put your clang directory here.
+export KBUILD_BUILD_USER=Bapak # Change with your own name or else.
+export KBUILD_BUILD_HOST=FzrL.io # Change with your own hostname.
+IMAGE=$(pwd)/poplarr/out/arch/arm64/boot/Image.gz-dtb
 DATE=$(date +"%F-%S")
 START=$(date +"%s")
 
@@ -19,7 +19,7 @@ START=$(date +"%s")
 # Warning !! Dont Change anything there without known reason.
 function check() {
 echo ================================================
-echo Gasss
+echo Gassss
 echo ================================================
 echo BUILDER NAME = ${KBUILD_BUILD_USER}
 echo BUILDER HOSTNAME = ${KBUILD_BUILD_HOST}
@@ -38,14 +38,14 @@ function compile() {
         -d chat_id="${CHAT_ID}" \
         -d "disable_web_page_preview=true" \
         -d "parse_mode=html" \
-        -d text="<b>Build Start Brads</b>%0ABUILDER NAME : <code>${KBUILD_BUILD_USER}</code>%0ABUILDER HOST : <code>${KBUILD_BUILD_HOST}</code>%0ADEVICE DEFCONFIG : <code>${DEVICE_DEFCONFIG}</code>%0ACLANG ROOTDIR : <code>${CLANG_ROOTDIR}</code>%0AKERNEL ROOTDIR : <code>${KERNEL_ROOTDIR}</code>"
+        -d text="<b>⚒🛠 BUILD START BRAY 🛠⚒ WITH:</b>%0ABUILDER NAME : <code>${KBUILD_BUILD_USER}</code>%0ABUILDER HOST : <code>${KBUILD_BUILD_HOST}</code>%0ADEVICE DEFCONFIG : <code>${DEVICE_DEFCONFIG}</code>%0ACLANG ROOTDIR : <code>${CLANG_ROOTDIR}</code>%0AKERNEL ROOTDIR : <code>${KERNEL_ROOTDIR}</code>"
         -d Build Started on : ${date}
    # xyzplaygrnd
    curl -s -X POST "https://api.telegram.org/bot${TOKEN}/sendMessage" \
         -d chat_id="-1001461733416" \
         -d "disable_web_page_preview=true" \
         -d "parse_mode=html" \
-        -d text="<b>Build Start Brads</b>%0ABUILDER NAME : <code>${KBUILD_BUILD_USER}</code>%0ABUILDER HOST : <code>${KBUILD_BUILD_HOST}</code>%0ADEVICE DEFCONFIG : <code>${DEVICE_DEFCONFIG}</code>%0ACLANG VERSION : <code>$(${CLANG_ROOTDIR}/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</code>%0ACLANG ROOTDIR : <code>${CLANG_ROOTDIR}</code>%0AKERNEL ROOTDIR : <code>${KERNEL_ROOTDIR}</code>"
+        -d text="<b>⚒🛠 BUILD START BRAY 🛠⚒ WITH:</b>%0ABUILDER NAME : <code>${KBUILD_BUILD_USER}</code>%0ABUILDER HOST : <code>${KBUILD_BUILD_HOST}</code>%0ADEVICE DEFCONFIG : <code>${DEVICE_DEFCONFIG}</code>%0ACLANG VERSION : <code>$(${CLANG_ROOTDIR}/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</code>%0ACLANG ROOTDIR : <code>${CLANG_ROOTDIR}</code>%0AKERNEL ROOTDIR : <code>${KERNEL_ROOTDIR}</code>"
 
   cd ${KERNEL_ROOTDIR}
   make -j$(nproc) O=out ARCH=arm64 ${DEVICE_DEFCONFIG}
@@ -89,13 +89,13 @@ function push() {
         -F chat_id="${CHAT_ID}" \
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" \
-        -F caption="Compile took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s). | For <b>Sony Xperia Xz1 (poplar)</b> | <b>$(${CLANG_ROOTDIR}/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</b>"
-
+        -F caption="🖇 Build Beres Bray, Cepet Gak Tuh.. Cuma $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s) yuhuuu. | For <b>Sony Xperia Xz1 (poplar)</b> | <b>$(${CLANG_ROOTDIR}/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</b>"
+        
     curl -F document=@$ZIP "https://api.telegram.org/bot${TOKEN}/sendDocument" \
         -F chat_id="-1001461733416" \
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" \
-        -F caption="Compile took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s). | For <b>Sony Xperia Xz1 (poplar)</b> | <b>$(${CLANG_ROOTDIR}/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</b>"
+        -F caption="🖇 Build Beres Bray, Cepet Gak Tuh.. Cuma $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s) yuhuuu. | For <b>Sony Xperia Xz1 (poplar)</b> | <b>$(${CLANG_ROOTDIR}/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</b>"
 
 }
 # Fin Error
@@ -118,7 +118,7 @@ function finerr() {
 # Zipping
 function zipping() {
     cd AnyKernel || exit 1
-    zip -r9 ignominiOus-poplar-${DATE}.zip *
+    zip -r9 MenolakPunah-${DATE}.zip *
     cd ..
 }
 check
